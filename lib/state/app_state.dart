@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../models/bp_classification.dart';
 import '../models/bp_record.dart';
@@ -68,10 +68,24 @@ class AppState extends ChangeNotifier {
 
   BpRecord? get latest => records.isEmpty ? null : records.first;
 
+  /// 是否写入演示数据：
+  /// - 默认：debug 构建写入、release 构建（发布给用户）为空；
+  /// - 可用 `--dart-define=SEED_DATA=true`（或 `false`）强制覆盖，
+  ///   便于在 debug 下测试空状态、或在 release 下临时演示。
+  static const _seedFlag = String.fromEnvironment('SEED_DATA');
+  bool get _shouldSeed {
+    if (_seedFlag == 'true') return true;
+    if (_seedFlag == 'false') return false;
+    return kDebugMode;
+  }
+
   Future<void> init() async {
     _records = await _storage.loadRecords();
     _tasks = await _storage.loadTasks();
-    if (!await _storage.isSeeded() && _records.isEmpty && _tasks.isEmpty) {
+    if (_shouldSeed &&
+        !await _storage.isSeeded() &&
+        _records.isEmpty &&
+        _tasks.isEmpty) {
       _seed();
       await _storage.markSeeded();
       await _persist();
