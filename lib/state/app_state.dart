@@ -68,12 +68,14 @@ class AppState extends ChangeNotifier {
 
   BpRecord? get latest => records.isEmpty ? null : records.first;
 
-  /// 是否写入演示数据：
-  /// - 默认：debug 构建写入、release 构建（发布给用户）为空；
+  /// 是否写入「演示血压记录」：
+  /// - 默认：debug 构建写入、release 构建（发布给用户）不写入（保持血压数据为空）；
   /// - 可用 `--dart-define=SEED_DATA=true`（或 `false`）强制覆盖，
   ///   便于在 debug 下测试空状态、或在 release 下临时演示。
+  ///
+  /// 注意：「规划默认模板」不受此开关控制，所有构建首次启动都会写入，作为参考，用户可自行删除。
   static const _seedFlag = String.fromEnvironment('SEED_DATA');
-  bool get _shouldSeed {
+  bool get _shouldSeedRecords {
     if (_seedFlag == 'true') return true;
     if (_seedFlag == 'false') return false;
     return kDebugMode;
@@ -82,11 +84,11 @@ class AppState extends ChangeNotifier {
   Future<void> init() async {
     _records = await _storage.loadRecords();
     _tasks = await _storage.loadTasks();
-    if (_shouldSeed &&
-        !await _storage.isSeeded() &&
-        _records.isEmpty &&
-        _tasks.isEmpty) {
-      _seed();
+    if (!await _storage.isSeeded()) {
+      // 规划默认模板：所有构建（含上架版）首次启动都写入，作为参考，用户可自行删除。
+      if (_tasks.isEmpty) _seedDefaultTasks();
+      // 演示血压记录：仅调试构建写入（或显式 SEED_DATA=true）。
+      if (_shouldSeedRecords && _records.isEmpty) _seedDemoRecords();
       await _storage.markSeeded();
       await _persist();
     }
@@ -200,8 +202,8 @@ class AppState extends ChangeNotifier {
   String _id() =>
       '${DateTime.now().microsecondsSinceEpoch}_${_rng.nextInt(99999)}';
 
-  /// 首次启动写入演示数据，让界面有内容可看。
-  void _seed() {
+  /// 演示血压记录（仅调试/演示用）。
+  void _seedDemoRecords() {
     final now = DateTime.now();
     // 最近 14 天，每天早晚各一条，模拟轻度高血压逐步改善。
     for (int d = 13; d >= 0; d--) {
@@ -226,7 +228,10 @@ class AppState extends ChangeNotifier {
         note: '',
       ));
     }
+  }
 
+  /// 规划默认模板：所有构建首次启动都写入，提供常见的血压管理日程供参考，用户可自行增删。
+  void _seedDefaultTasks() {
     _tasks.addAll([
       PlanTask(id: _id(), title: '晨起测量血压', type: TaskType.measure, hour: 7, minute: 0),
       PlanTask(id: _id(), title: '服用降压药', type: TaskType.medication, hour: 8, minute: 0),
