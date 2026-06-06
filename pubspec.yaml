@@ -55,20 +55,21 @@ dev_dependencies:
   flutter_native_splash: ^2.4.7
 
 flutter_native_splash:
-  # 启动屏：白色底 + 居中品牌图标
-  color: "#FFFFFF"
-  image: assets/splash/splash_logo.png
-  color_dark: "#1A1C1E"
-  image_dark: assets/splash/splash_logo.png
+  # 启动屏：橙红渐变铺满全屏 + 居中白色品牌 logo
+  # 注意：插件中只要设了 color 就会用纯色忽略 background_image，故此处不设 color。
+  background_image: assets/splash/splash_bg.png
+  image: assets/splash/logo_transparent.png
+  background_image_dark: assets/splash/splash_bg.png
+  image_dark: assets/splash/logo_transparent.png
   android: true
   ios: true
   web: false
-  # Android 12+ 使用独立的启动屏 API
+  # Android 12+ 启动屏 API 只支持纯色底 + 居中图标
   android_12:
-    color: "#FFFFFF"
-    image: assets/splash/splash_logo.png
-    color_dark: "#1A1C1E"
-    image_dark: assets/splash/splash_logo.png
+    color: "#FF5A2C"
+    image: assets/splash/logo_transparent.png
+    color_dark: "#FF5A2C"
+    image_dark: assets/splash/logo_transparent.png
 
 flutter_launcher_icons:
   image_path: "assets/icon/app_icon.png"
