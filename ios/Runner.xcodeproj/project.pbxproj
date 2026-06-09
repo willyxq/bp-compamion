@@ -17,6 +17,13 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+
+		WGT001A1B2C3D4E5F600000E /* BpWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT001A1B2C3D4E5F6000001 /* BpWidgetBundle.swift */; };
+		WGT001A1B2C3D4E5F600000F /* BpWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT001A1B2C3D4E5F6000002 /* BpWidget.swift */; };
+		WGT001A1B2C3D4E5F6000010 /* BpSharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT001A1B2C3D4E5F6000003 /* BpSharedStore.swift */; };
+		WGT001A1B2C3D4E5F6000011 /* LogBpIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = WGT001A1B2C3D4E5F6000004 /* LogBpIntent.swift */; };
+		WGT001A1B2C3D4E5F6000012 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = WGT001A1B2C3D4E5F6000005 /* Info.plist */; };
+		WGT001A1B2C3D4E5F600000B /* BpWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = WGT001A1B2C3D4E5F6000007 /* BpWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +33,14 @@
 			proxyType = 1;
 			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
 			remoteInfo = Runner;
+		};
+
+		WGT001A1B2C3D4E5F600000C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = WGT001A1B2C3D4E5F6000009;
+			remoteInfo = BpWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -38,6 +53,18 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+		WGT001A1B2C3D4E5F600000A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				WGT001A1B2C3D4E5F600000B /* BpWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -67,6 +94,14 @@
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F72DF0EE135440D86F12CCF7 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
+
+		WGT001A1B2C3D4E5F6000001 /* BpWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BpWidgetBundle.swift; sourceTree = "<group>"; };
+		WGT001A1B2C3D4E5F6000002 /* BpWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BpWidget.swift; sourceTree = "<group>"; };
+		WGT001A1B2C3D4E5F6000003 /* BpSharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BpSharedStore.swift; sourceTree = "<group>"; };
+		WGT001A1B2C3D4E5F6000004 /* LogBpIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogBpIntent.swift; sourceTree = "<group>"; };
+		WGT001A1B2C3D4E5F6000005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		WGT001A1B2C3D4E5F6000006 /* BpWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BpWidget.entitlements; sourceTree = "<group>"; };
+		WGT001A1B2C3D4E5F6000007 /* BpWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BpWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +121,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+
+		WGT001A1B2C3D4E5F6000015 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,6 +143,20 @@
 				2E02BDC34B05778A69FC37C1 /* Pods-RunnerTests.profile.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+
+		WGT001A1B2C3D4E5F6000008 /* BpWidget */ = {
+			isa = PBXGroup;
+			children = (
+				WGT001A1B2C3D4E5F6000001 /* BpWidgetBundle.swift */,
+				WGT001A1B2C3D4E5F6000002 /* BpWidget.swift */,
+				WGT001A1B2C3D4E5F6000003 /* BpSharedStore.swift */,
+				WGT001A1B2C3D4E5F6000004 /* LogBpIntent.swift */,
+				WGT001A1B2C3D4E5F6000005 /* Info.plist */,
+				WGT001A1B2C3D4E5F6000006 /* BpWidget.entitlements */,
+			);
+			path = BpWidget;
 			sourceTree = "<group>";
 		};
 		331C8082294A63A400263BE5 /* RunnerTests */ = {
@@ -135,6 +192,7 @@
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
+				WGT001A1B2C3D4E5F6000008 /* BpWidget */,
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				08B6BE86A4E743BAD5568B3D /* Pods */,
@@ -146,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
+				WGT001A1B2C3D4E5F6000007 /* BpWidgetExtension.appex */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
 			);
 			name = Products;
@@ -199,17 +258,37 @@
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
+				WGT001A1B2C3D4E5F600000A /* Embed Foundation Extensions */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				88235C5A41620844797270AE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				WGT001A1B2C3D4E5F600000D /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
+		};
+
+		WGT001A1B2C3D4E5F6000009 /* BpWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = WGT001A1B2C3D4E5F6000016 /* Build configuration list for PBXNativeTarget "BpWidgetExtension" */;
+			buildPhases = (
+				WGT001A1B2C3D4E5F6000013 /* Sources */,
+				WGT001A1B2C3D4E5F6000015 /* Frameworks */,
+				WGT001A1B2C3D4E5F6000014 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BpWidgetExtension;
+			productName = BpWidgetExtension;
+			productReference = WGT001A1B2C3D4E5F6000007 /* BpWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -245,6 +324,7 @@
 			projectRoot = "";
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
+				WGT001A1B2C3D4E5F6000009 /* BpWidgetExtension */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
 			);
 		};
@@ -266,6 +346,15 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+		WGT001A1B2C3D4E5F6000014 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				WGT001A1B2C3D4E5F6000012 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +474,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+
+		WGT001A1B2C3D4E5F6000013 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				WGT001A1B2C3D4E5F600000E /* BpWidgetBundle.swift in Sources */,
+				WGT001A1B2C3D4E5F600000F /* BpWidget.swift in Sources */,
+				WGT001A1B2C3D4E5F6000010 /* BpSharedStore.swift in Sources */,
+				WGT001A1B2C3D4E5F6000011 /* LogBpIntent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -392,6 +493,12 @@
 			isa = PBXTargetDependency;
 			target = 97C146ED1CF9000F007C117D /* Runner */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
+		};
+
+		WGT001A1B2C3D4E5F600000D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = WGT001A1B2C3D4E5F6000009 /* BpWidgetExtension */;
+			targetProxy = WGT001A1B2C3D4E5F600000C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -475,6 +582,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = SNVLMR7B68;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -695,6 +805,82 @@
 			};
 			name = Release;
 		};
+
+		WGT001A1B2C3D4E5F6000017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BpWidget/BpWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = SNVLMR7B68;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BpWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bangguoxiong.bpCompanion.BpWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		WGT001A1B2C3D4E5F6000018 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BpWidget/BpWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = SNVLMR7B68;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BpWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bangguoxiong.bpCompanion.BpWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		WGT001A1B2C3D4E5F6000019 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BpWidget/BpWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = SNVLMR7B68;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BpWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bangguoxiong.bpCompanion.BpWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Profile;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -724,6 +910,17 @@
 				97C147061CF9000F007C117D /* Debug */,
 				97C147071CF9000F007C117D /* Release */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+
+		WGT001A1B2C3D4E5F6000016 /* Build configuration list for PBXNativeTarget "BpWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				WGT001A1B2C3D4E5F6000017 /* Debug */,
+				WGT001A1B2C3D4E5F6000018 /* Release */,
+				WGT001A1B2C3D4E5F6000019 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

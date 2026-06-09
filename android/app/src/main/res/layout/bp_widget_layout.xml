@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bp_widget_background"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/widget_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="轻松血压"
+            android:textColor="#1A1C1E"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_latest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--/--"
+            android:textColor="#E5532E"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="快速记录"
+        android:textColor="#5C5F66"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收缩压"
+        android:textColor="#5C5F66"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_sys_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="120 mmHg"
+        android:textColor="#1A1C1E"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/widget_sys_minus"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="−" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/widget_sys_plus"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="+" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="舒张压"
+        android:textColor="#5C5F66"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_dia_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="80 mmHg"
+        android:textColor="#1A1C1E"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/widget_dia_minus"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="−" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/widget_dia_plus"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="+" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="心率"
+        android:textColor="#5C5F66"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/widget_pulse_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="72 bpm"
+        android:textColor="#1A1C1E"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/widget_pulse_minus"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="−" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/widget_pulse_plus"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="+" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/widget_save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#E5532E"
+        android:text="保存"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/widget_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#E5532E"
+        android:textSize="11sp" />
+</LinearLayout>
