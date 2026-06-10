@@ -70,5 +70,13 @@
 		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSCameraUsageDescription</key>
+		<string>用于拍摄血压计屏幕并自动识别读数</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>用于语音录入血压读数</string>
+		<key>NSSpeechRecognitionUsageDescription</key>
+		<string>用于将语音转换为血压数值</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>用于从相册选择血压计照片并识别读数</string>
 	</dict>
 </plist>
