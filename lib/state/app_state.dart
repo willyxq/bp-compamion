@@ -82,7 +82,6 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> init() async {
-    await _storage.initWidgetSync();
     _records = await _storage.loadRecords();
     _tasks = await _storage.loadTasks();
     if (!await _storage.isSeeded()) {
@@ -94,17 +93,6 @@ class AppState extends ChangeNotifier {
       await _persist();
     }
     _loading = false;
-    notifyListeners();
-  }
-
-  /// Pull records written by the home-screen widget while the app was closed.
-  Future<void> reloadFromWidgetStorage() async {
-    final merged = await _storage.loadRecords();
-    if (merged.length == _records.length &&
-        merged.every((r) => _records.any((e) => e.id == r.id))) {
-      return;
-    }
-    _records = merged;
     notifyListeners();
   }
 

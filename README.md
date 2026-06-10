@@ -79,31 +79,6 @@ flutter run -d chrome
 
 > 小技巧：`--dart-define=INITIAL_TAB=2` 可直接进入指定 Tab（0 首页 / 1 记录 / 2 统计 / 3 规划），用于深链或演示。
 
-## 桌面小组件（iOS / Android）
-
-在**不打开 App** 的情况下快速记录血压：
-
-| 平台 | 交互方式 | 最低系统 |
-|---|---|---|
-| **iOS** | 添加「轻松血压」小组件 → 点「记录血压」→ 系统弹出收缩压/舒张压/心率输入框（App Intent） | iOS 17+ |
-| **Android** | 添加桌面小组件 → 用 +/- 调整数值 → 点「保存」 | Android 5+ |
-
-小组件与 App 通过 **App Group / 共享存储** 同步记录；回到 App 或从后台恢复时会自动合并数据。
-
-### 添加小组件
-
-- **iPhone**：长按主屏幕 → 「+」→ 搜索「轻松血压」→ 添加小组件
-- **Android**：长按主屏幕 → 「小组件」→ 选择「轻松血压」
-
-### 云端 / Linux 验证小组件 UI
-
-无法在 Linux 上运行 iOS 模拟器或真机 WidgetKit，可用 Flutter 预览页对照设计：
-
-```bash
-flutter run -d chrome --dart-define=SHOW_WIDGET_PREVIEW=true
-flutter test test/bp_widget_preview_test.dart
-```
-
 ## 测试
 
 ```bash
