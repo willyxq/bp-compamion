@@ -6,6 +6,9 @@ import 'package:provider/provider.dart';
 
 import '../models/bp_classification.dart';
 import '../models/bp_record.dart';
+import '../services/bp_input_parser.dart';
+import '../services/bp_ocr.dart';
+import '../services/bp_voice_input.dart';
 import '../state/app_state.dart';
 
 Future<void> showAddRecordSheet(BuildContext context) {
@@ -34,14 +37,127 @@ class _AddRecordSheetState extends State<_AddRecordSheet> {
   final _note = TextEditingController();
   MeasureContext _context = MeasureContext.morning;
   DateTime _time = DateTime.now();
+  bool _busy = false;
+  bool _listening = false;
+  String _voiceHint = '';
 
   @override
   void dispose() {
+    if (_listening) BpVoiceInput.stop();
     _sys.dispose();
     _dia.dispose();
     _pulse.dispose();
     _note.dispose();
     super.dispose();
+  }
+
+  void _applyParsed(BpParsedValues values, {String? sourceNote}) {
+    setState(() {
+      if (values.systolic != null) _sys.text = '${values.systolic}';
+      if (values.diastolic != null) _dia.text = '${values.diastolic}';
+      if (values.pulse != null) _pulse.text = '${values.pulse}';
+      if (sourceNote != null && _note.text.trim().isEmpty) {
+        _note.text = sourceNote;
+      }
+    });
+  }
+
+  void _showMessage(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  Future<void> _pickPhotoSource() async {
+    final supported = await BpOcr.isSupported;
+    if (!mounted) return;
+    if (!supported) {
+      _showMessage('拍照识别请在 iOS/Android 手机 App 中使用');
+      return;
+    }
+
+    final source = await showModalBottomSheet<ImageSourceKind>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_camera_outlined),
+              title: const Text('拍摄血压计屏幕'),
+              onTap: () => Navigator.pop(ctx, ImageSourceKind.camera),
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library_outlined),
+              title: const Text('从相册选择'),
+              onTap: () => Navigator.pop(ctx, ImageSourceKind.gallery),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (source == null || !mounted) return;
+
+    setState(() => _busy = true);
+    try {
+      final values = switch (source) {
+        ImageSourceKind.camera => await BpOcr.recognizeFromCamera(),
+        ImageSourceKind.gallery => await BpOcr.recognizeFromGallery(),
+      };
+      _applyParsed(values, sourceNote: '拍照识别');
+      _showMessage('已识别：${values.systolic}/${values.diastolic}'
+          '${values.pulse != null ? '，脉搏 ${values.pulse}' : ''}');
+    } on StateError catch (e) {
+      _showMessage(e.message);
+    } catch (e) {
+      _showMessage('识别失败：$e');
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _toggleVoice() async {
+    if (_listening) {
+      await BpVoiceInput.stop();
+      setState(() {
+        _listening = false;
+        _voiceHint = '';
+      });
+      return;
+    }
+
+    setState(() {
+      _listening = true;
+      _voiceHint = '请说：高压一百三十四，低压九十七，脉搏六十三';
+    });
+
+    await BpVoiceInput.listen(
+      onPartial: (text) {
+        if (!mounted) return;
+        setState(() => _voiceHint = text);
+      },
+      onResult: (values, transcript) {
+        if (!mounted) return;
+        _applyParsed(values, sourceNote: '语音识别');
+        setState(() {
+          _listening = false;
+          _voiceHint = '';
+        });
+        _showMessage('已识别：$transcript');
+      },
+      onError: (message) {
+        if (!mounted) return;
+        setState(() {
+          _listening = false;
+          _voiceHint = '';
+        });
+        _showMessage(message);
+      },
+    );
   }
 
   BpLevel? get _previewLevel {
@@ -120,7 +236,71 @@ class _AddRecordSheetState extends State<_AddRecordSheet> {
             const SizedBox(height: 16),
             const Text('记录血压',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-            const SizedBox(height: 20),
+            const SizedBox(height: 14),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _busy ? null : _pickPhotoSource,
+                    icon: _busy
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.photo_camera_outlined, size: 20),
+                    label: const Text('拍照识别'),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _busy ? null : _toggleVoice,
+                    icon: Icon(
+                      _listening ? Icons.mic : Icons.mic_none_outlined,
+                      size: 20,
+                      color: _listening ? Colors.red : null,
+                    ),
+                    label: Text(_listening ? '停止' : '语音识别'),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      foregroundColor: _listening ? Colors.red : null,
+                      side: _listening
+                          ? const BorderSide(color: Colors.red)
+                          : null,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            if (_listening && _voiceHint.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.red.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.hearing, size: 18, color: Colors.red),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        _voiceHint,
+                        style: const TextStyle(fontSize: 13, height: 1.3),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
@@ -249,3 +429,5 @@ class _AddRecordSheetState extends State<_AddRecordSheet> {
     return '${t.year}-${two(t.month)}-${two(t.day)}  ${two(t.hour)}:${two(t.minute)}';
   }
 }
+
+enum ImageSourceKind { camera, gallery }
