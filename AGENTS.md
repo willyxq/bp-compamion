@@ -25,7 +25,7 @@ See `README.md` for iOS/Android targets (require macOS / Android SDK respectivel
 ### Platform notes
 
 - **Web (Chrome)** is the preferred target in this Linux cloud VM. Use `--web-browser-flag=--no-sandbox` because Chrome runs inside a container.
-- **Linux desktop** works after `ninja-build` and `libgtk-3-dev` are installed (already present in the VM image).
+- **Linux desktop** requires `ninja-build` and `libgtk-3-dev` (`sudo apt-get install -y ninja-build libgtk-3-dev`). These are not installed by default in the cloud VM; use **Chrome (web)** unless you install them.
 - **Android SDK** is not installed; `flutter doctor` will report Android toolchain as missing. This does not block Web/Linux development or `flutter test`.
 - **No services to start** — the app is fully offline after `flutter pub get`.
 
