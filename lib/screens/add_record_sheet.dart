@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../models/bp_classification.dart';
 import '../models/bp_record.dart';
+import '../services/bp_record_factory.dart';
 import '../state/app_state.dart';
 
 Future<void> showAddRecordSheet(BuildContext context) {
@@ -54,14 +53,13 @@ class _AddRecordSheetState extends State<_AddRecordSheet> {
   void _save() {
     final s = int.tryParse(_sys.text);
     final d = int.tryParse(_dia.text);
-    if (s == null || d == null || s < 50 || s > 300 || d < 30 || d > 200) {
+    if (s == null || d == null || !BpRecordFactory.isValid(s, d)) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('请输入有效的收缩压和舒张压')),
       );
       return;
     }
-    final record = BpRecord(
-      id: '${DateTime.now().microsecondsSinceEpoch}_${Random().nextInt(99999)}',
+    final record = BpRecordFactory.create(
       systolic: s,
       diastolic: d,
       pulse: int.tryParse(_pulse.text),
